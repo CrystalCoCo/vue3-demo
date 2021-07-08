@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <a-button type="primary">Primary</a-button>
+    <a-button type="primary" @click="openLoading">打开</a-button>
+    <a-button type="primary" @click="closeLoading">关闭</a-button>
     <a-table :dataSource="dataSource" :columns="columns" />
   </div>
   <a-pagination show-size-changer v-model:current="current1" v-model:pageSize="pageSize" :total="500" @showSizeChange="onShowSizeChange" />
@@ -8,7 +9,8 @@
 
 <script>
   import { Table, Pagination } from 'ant-design-vue'
-  
+  import { useStore} from 'vuex'
+  import { computed } from 'vue'
   export default {
     name: 'Home',
     components: {
@@ -49,6 +51,19 @@
             key: 'address',
           },
         ]
+      }
+    },
+    setup() {
+      const store = useStore()
+      function openLoading() {
+        store.commit('openLoading')
+      }
+      function closeLoading() {
+        store.commit('hideLoading')
+      }
+      return {
+        openLoading,
+        closeLoading
       }
     }
   }
