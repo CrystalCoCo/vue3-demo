@@ -5,11 +5,8 @@ export default createStore({
     spinning: false
   },
   mutations: {
-    openLoading(state) {
-      state.spinning = true
-    },
-    hideLoading(state) {
-      state.spinning = false
+    loading(state, status) {
+      state.spinning = status
     }
   },
   actions: {

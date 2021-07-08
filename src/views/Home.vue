@@ -56,10 +56,10 @@
     setup() {
       const store = useStore()
       function openLoading() {
-        store.commit('openLoading')
+        store.commit('loading', true)
       }
       function closeLoading() {
-        store.commit('hideLoading')
+        store.commit('loading', false)
       }
       return {
         openLoading,

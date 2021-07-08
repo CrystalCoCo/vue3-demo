@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { log } from './api'
 import baseUrl from './env'
+import store from './store'
 
 //axios实例
 const instance = axios.create({
@@ -12,16 +13,18 @@ const instance = axios.create({
 })
 
 let loadingNum = 0, loading = true, toast = true
-function http(opts = { loading: true, toast: true }) {
+export function http(opts = { loading: true, toast: true }) {
   loading = opts.loading
   toast = opts.loading
   instance.interceptors.request.use(config => {
     loadingNum ++
+    if(loading) store.commit('loading', true)
     config.headers.Authorization = token
     return config
   }, error => Promise.reject(error))
   instance.interceptors.response.use(response => {
     loadingNum --
+    if(loadingNum <= 0) store.commit('loading', false)
     if(response.data.code === '0000') return response.data
     else {
       log(response.data)
@@ -29,28 +32,13 @@ function http(opts = { loading: true, toast: true }) {
     }
   }, error => {
     loadingNum--
+    if(loadingNum <= 0) store.commit('loading', false)
     log(error.response)
     return Promise.reject(error.response)
   })
   return instance
 }
 
-
-export const get = (url, data, opts) => {
-  return http(opts).get(url, { params: data })
-}
-
-export const post = (url, data, params, opts) => {
-  return http(opts).post(url, data, { params: params })
-}
-
-export const deleteReq = (url, data, opts) => {
-  return http(opts).delete(url, { params: data })
-}
-
-export const put = (url, data, params, opts) => {
-  return http(opts).put(url, data, { params: params })
-}
 
 
 
