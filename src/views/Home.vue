@@ -4,19 +4,17 @@
     <a-button type="primary" @click="closeLoading">关闭</a-button>
     <a-table :dataSource="dataSource" :columns="columns" />
   </div>
-  <a-pagination show-size-changer v-model:current="current1" v-model:pageSize="pageSize" :total="500" @showSizeChange="onShowSizeChange" />
 </template>
 
 <script>
-  import { Table, Pagination } from 'ant-design-vue'
+  import { Table } from 'ant-design-vue'
   import { getArticleList } from '../api/home'
   import { useStore} from 'vuex'
   import { onMounted } from '@vue/runtime-core'
   export default {
     name: 'Home',
     components: {
-      ATable: Table,
-      APagination: Pagination
+      ATable: Table
     },
     data() {
       return {
