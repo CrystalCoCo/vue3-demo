@@ -1,3 +1,4 @@
+import { message } from 'ant-design-vue';
 const HTTP_STATUS = {
   400: '错误请求',
   403: '拒绝访问',
@@ -12,6 +13,6 @@ const HTTP_STATUS = {
   505: 'HTTP版本不受支持'
 }
 export const log = res => {
-  const { status, message } = res
-  return HTTP_STATUS[status] || message
+  const { status } = res
+  message.success(HTTP_STATUS[status]|| res.message)
 }
