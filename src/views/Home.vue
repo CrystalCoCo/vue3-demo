@@ -9,8 +9,9 @@
 
 <script>
   import { Table, Pagination } from 'ant-design-vue'
+  import { getArticleList } from '../api/home'
   import { useStore} from 'vuex'
-  import { computed } from 'vue'
+  import { onMounted } from '@vue/runtime-core'
   export default {
     name: 'Home',
     components: {
@@ -61,6 +62,10 @@
       function closeLoading() {
         store.commit('loading', false)
       }
+
+      onMounted(async() => {
+        const { data, code } = await getArticleList({ flag: 'yqdynamic', pageSize: 8 })
+      })
       return {
         openLoading,
         closeLoading

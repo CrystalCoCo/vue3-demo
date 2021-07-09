@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { log } from './api'
+import { log } from './log'
 import baseUrl from './env'
-import store from './store'
+import store from '../store/index'
 
 //axios实例
 const instance = axios.create({
@@ -19,7 +19,7 @@ export function http(opts = { loading: true, toast: true }) {
   instance.interceptors.request.use(config => {
     loadingNum ++
     if(loading) store.commit('loading', true)
-    config.headers.Authorization = token
+    //config.headers.Authorization = token
     return config
   }, error => Promise.reject(error))
   instance.interceptors.response.use(response => {
@@ -38,6 +38,8 @@ export function http(opts = { loading: true, toast: true }) {
   })
   return instance
 }
+
+export default instance
 
 
 
