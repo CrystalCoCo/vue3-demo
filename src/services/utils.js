@@ -22,16 +22,6 @@ export function setCookie(name,value,time){
   document.cookie=`${name}=${value};expires=${time.toGMTString()};path=/;domain=${cookieurl}`//用cookie来跨域
 }
 
-//清空cookie值
-export function expireTime(Name) {
-  //获取当前时间
-  var date=new Date()
-  //将date设置为过去的时间
-  date.setTime(date.getTime()-1)
-  //将userId这个cookie删除
-  document.cookie=`${Name}=;expire=${date.toGMTString()};path=/;domain=${cookieurl}`
-}
-
 //刷新token
 async function getRefreshToken(param) { // 刷新token 注意这里用到的service
   let { data } = await refreshToken({ refreshToken: param })
@@ -60,8 +50,5 @@ export function isRefreshTokenExpired() {
     }, 300000)
   }
 }
-//清除定时器
-export function clearInterVal(){
-  clearInterval(interval)
-}
+
 
