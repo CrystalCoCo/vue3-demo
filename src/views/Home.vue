@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import { Table, message } from 'ant-design-vue'
+  import { Table } from 'ant-design-vue'
   import { getArticleList } from '../api/home'
   import { useStore} from 'vuex'
   import { onMounted } from '@vue/runtime-core'
