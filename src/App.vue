@@ -21,6 +21,7 @@
       }
     },
     setup() {
+      console.log(2222222222222222222222)
       const store = useStore()
       let spinning = computed(() => store.state.spinning) 
       return {
