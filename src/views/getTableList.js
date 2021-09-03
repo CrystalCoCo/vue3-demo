@@ -7,7 +7,10 @@ export default function useGetTableList() {
     list.value = data.list
   }
 
-  onMounted(getTableList)
+  //onMounted(getTableList)
+  onMounted(() => {
+    getTableList()
+  })
 
   return {
     list,
