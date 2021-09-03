@@ -15,7 +15,8 @@
   import useGetTableList from './getTableList'
   //import { getArticleList } from '../api/home'
   import { useStore} from 'vuex'
-  import { onMounted } from '@vue/runtime-core'
+  import { useRoute } from 'vue-router'
+  import { onMounted, reactive, toRefs } from 'vue'
   const columns = [
     {
       title: '姓名',
@@ -40,27 +41,13 @@
       ATable: Table
     },
     
-    data() {
-      return {
-        dataSource: [
-          {
-            key: '1',
-            name: '胡彦斌',
-            age: 32,
-            address: '西湖区湖底公园1号',
-          },
-          {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-          },
-        ]
-      }
-    },
     setup() {
       const { list, getTableList } = useGetTableList()
       const store = useStore()
+      const route = useRoute()
+      const state = reactive({
+        type: route.query.type
+      })
       function openLoading() {
         store.commit('loading', true)
       }
@@ -72,7 +59,9 @@
         // const { data, code } = await getArticleList({ flag: 'knowledge', pageSize: 8 })
         
       })
+      console.log(state, 'statestatestatestatestatestate')
       return {
+        ...toRefs(state),
         openLoading,
         closeLoading,
         columns,
