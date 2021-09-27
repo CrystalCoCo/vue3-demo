@@ -10,6 +10,7 @@ export default function useGetTableList() {
   //onMounted(getTableList)
   onMounted(() => {
     getTableList()
+    console.log(2222222222222222222)
   })
 
   return {

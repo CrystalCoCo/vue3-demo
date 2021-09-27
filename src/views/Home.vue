@@ -57,7 +57,7 @@
 
       onMounted(async() => {
         // const { data, code } = await getArticleList({ flag: 'knowledge', pageSize: 8 })
-        
+        console.log(1111111111111111111111)
       })
       console.log(state, 'statestatestatestatestatestate')
       return {
